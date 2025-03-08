@@ -1,11 +1,14 @@
 import './App.css'
-
+import {AuthContextProvidor} from './index'
 function App() {
 
   return (
-    <>
-  La app funciona
-    </>
+
+   <>
+   <AuthContextProvidor>
+    <span>Hola desde content</span>
+   </AuthContextProvidor>
+   </>
   )
 }
 
