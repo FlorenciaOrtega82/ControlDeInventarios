@@ -16,3 +16,7 @@ export * from "./components/moleculas/Btnsave";
 export * from "./components/atomos/icono";
 export * from "./components/organismos/sidebar/ToggleTema";
 export * from "./components/organismos/MenuHambur";
+export * from "./store/AuthStore";
+export * from "./store/usuariosStore";
+export * from "./store/crudUsuarios";
+export * from './supabase/supabase.config';

@@ -9,10 +9,7 @@ export function MenuHambur() {
         <Container>
             <NavBar>
                 <HamburgerMenu onClick={() => setClick(!click)}>
-                    <label
-                        className={click ? "toggle active" : "toggle"}
-                        for="checkbox"
-                    >
+                    <label className={click ? "toggle active" : "toggle"}>
                         <div className="bars" id="bar1"></div>
                         <div className="bars" id="bar2"></div>
                         <div className="bars" id="bar3"></div>
@@ -163,6 +160,6 @@ const Menu = styled.div`
 const Divider = styled.div`
     height: 1px;
     width: 100%;
-    background: ${(props) => props.theme.bg4};
+    background: ${({ theme }) => theme.bg4};
     margin: ${() => v.lgSpacing} 0;
 `;
