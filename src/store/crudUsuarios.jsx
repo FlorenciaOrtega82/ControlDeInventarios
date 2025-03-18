@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-import { supabase } from "../index";
+import supabase from "../supabase/supabase.config";
 export const InsertarUsuarios = async (p) => {
     const { data, error } = await supabase
         .from("usuarios")
