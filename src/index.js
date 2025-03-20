@@ -25,3 +25,4 @@ export * from "./hooks/ProtectedRoute";
 export * from "./components/organismos/FooterLogin";
 export * from "./components/organismos/ToggleTema";
 export * from "./components/organismos/formularios/InputText";
+export * from "./components/organismos/formularios/RegistrarAdmin";
