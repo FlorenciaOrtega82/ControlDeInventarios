@@ -1,4 +1,5 @@
 import styled from "styled-components";
+<<<<<<< Updated upstream
 import {Icono} from "../../index"
 export function Btnsave({ funcion, titulo, bgcolor, icono,url }) {
   return (
@@ -15,6 +16,21 @@ export function Btnsave({ funcion, titulo, bgcolor, icono,url }) {
       </span>
     </Container>
   );
+=======
+import { Icono } from "../../index";
+export function Btnsave({ funcion, titulo, bgcolor, icono, url }) {
+    return (
+        <Container type="submit" $bgcolor={bgcolor}>
+            <Icono>{icono}</Icono>
+
+            <span className="btn" onClick={funcion}>
+                <a href={url} target="_blank">
+                    {titulo}
+                </a>
+            </span>
+        </Container>
+    );
+>>>>>>> Stashed changes
 }
 const Container = styled.button`
   display: flex;
