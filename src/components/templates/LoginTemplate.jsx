@@ -28,10 +28,12 @@ export function LoginTemplate() {
         handleSubmit,
     } = useForm();
     async function iniciar(data) {
+        console.log("Datos enviados:", data);
         const response = await signInWithEmail({
             correo: data.correo,
             pass: data.pass,
         });
+        console.log("Respuesta del servidor:", response);
         if (response) {
             navigate("/");
         } else {
@@ -91,13 +93,21 @@ export function LoginTemplate() {
                             )}
                         </InputText>
                         <ContainerBtn>
-                            <Btnsave titulo="Iniciar" bgcolor="#fc6b32" />
+                            <Btnsave
+                                titulo="Iniciar"
+                                bgcolor="#fc6b32"
+                                funcion={handleSubmit(iniciar)}
+                            />
                             <Btnsave
                                 funcion={() => setState(!state)}
                                 titulo="Crear cuenta"
                                 bgcolor="#ffffff"
+                                type="submit"
                             />
                         </ContainerBtn>
+                        {state && (
+                            <RegistrarAdmin setState={() => setState(false)} />
+                        )}
                     </form>
                 </div>
                 <FooterLogin />

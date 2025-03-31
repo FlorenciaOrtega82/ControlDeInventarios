@@ -9,7 +9,7 @@ export function SidebarCard() {
                 <div className="circle2"></div>
                 <h3>Cerrar sesión</h3>
                 <div className="contentBtn">
-                    <Btnsave titulo="Cerrar ..." bgcolor="#f8f2fd" />
+                    <Btnsave titulo="Cerrar ..." bgcolor="#f8f2fd"  />
                 </div>
             </div>
         </Container>

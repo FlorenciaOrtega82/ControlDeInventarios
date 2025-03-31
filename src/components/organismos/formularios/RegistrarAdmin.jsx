@@ -91,6 +91,8 @@ export function RegistrarAdmin({ setState }) {
                                 icono={<v.iconoguardar />}
                                 titulo="Guardar"
                                 bgcolor="#ff7556"
+                                type="submit"
+                                funcion={handleSubmit(mutation.mutateAsync)}
                             />
                         </div>
                     </section>
