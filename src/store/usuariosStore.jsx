@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { InsertarUsuarios } from "../index";
+import { InsertarUsuarios, MostrarUsuarios } from "../index";
 import supabase from "../supabase/supabase.config";
 
 export const useUsuariosStore = create((set, get) => ({
@@ -16,5 +16,11 @@ export const useUsuariosStore = create((set, get) => ({
             tipouser: "admin",
         });
         return datauser;
+    },
+    idusuarios: 0,
+    mostrarUsuarios: async () => {
+        const response = await MostrarUsuarios();
+        set({ idusuario: response.id });
+        return response;
     },
 }));
