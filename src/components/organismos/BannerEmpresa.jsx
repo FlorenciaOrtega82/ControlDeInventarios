@@ -3,7 +3,7 @@ import { v } from "../../styles/variables";
 import { CardDatosEmpresa } from "../moleculas/CardDatosEmpresa";
 import { useEmpresaStore } from "../../store/empresaStore";
 export function BannerEmpresa() {
-    const { dataempresa } = useEmpresaStore();
+    const { dataempresa, contadorusuarios } = useEmpresaStore();
     return (
         <Container>
             <div className="content-wrapper-context">
@@ -15,8 +15,14 @@ export function BannerEmpresa() {
                     StockPRO te mantiene siempre informado.
                 </div>
                 <ContentCard>
-                    <CardDatosEmpresa titulo="Moneda" valor="$/." />
-                    <CardDatosEmpresa titulo="Usuarios" valor="100" />
+                    <CardDatosEmpresa
+                        titulo="Moneda"
+                        valor={dataempresa.empresa?.simbolomoneda}
+                    />
+                    <CardDatosEmpresa
+                        titulo="Usuarios"
+                        valor={contadorusuarios}
+                    />
                 </ContentCard>
             </div>
             <div className="contentsvg">
