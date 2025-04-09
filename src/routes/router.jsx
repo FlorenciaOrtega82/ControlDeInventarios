@@ -8,7 +8,8 @@ import {
     SpinnerLoader,
     ErrorMolecula,
     useEmpresaStore,
-    Configuracion
+    Configuracion,
+    Marca,
 } from "../index";
 import { useQuery } from "@tanstack/react-query";
 
@@ -16,14 +17,18 @@ export function MyRoutes() {
     const { user } = UserAuth();
     const { mostrarUsuarios, idusuario } = useUsuariosStore();
     const { mostrarEmpresa } = useEmpresaStore();
-    const { data:datausuarios, isLoading, error } = useQuery({
+    const {
+        data: datausuarios,
+        isLoading,
+        error,
+    } = useQuery({
         queryKey: ["mostrar usuarios"],
         queryFn: mostrarUsuarios,
     });
     const { data: dataempresa } = useQuery({
         queryKey: ["mostrar empresa"],
         queryFn: () => mostrarEmpresa({ idusuario: idusuario }),
-        enabled:!!datausuarios
+        enabled: !!datausuarios,
     });
     if (isLoading) {
         return <SpinnerLoader />;
@@ -37,6 +42,7 @@ export function MyRoutes() {
             <Route element={<ProtectedRoute user={user} redirectTo="/login" />}>
                 <Route path="/" element={<Home />} />
                 <Route path="/configurar" element={<Configuracion />} />
+                <Route path="/configurar/marca" element={<Marca />} />
             </Route>
         </Routes>
     );
