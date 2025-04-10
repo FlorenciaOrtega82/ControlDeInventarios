@@ -13,7 +13,7 @@ export function Marca() {
     const { isLoading, error } = useQuery({
         queryKey: ["mostrar marca", { id_empresa: dataempresa?.id }],
         queryFn: () => mostrarMarca({ id_empresa: dataempresa?.id }),
-        enabled: dataempresa.empresa?.id != null,
+        enabled: dataempresa?.id != null,
     });
     const { data: buscardata } = useQuery({
         queryKey: [

@@ -79,6 +79,7 @@ export function RegistrarMarca({ onClose, dataSelect, accion }) {
                                 icono={<v.iconoguardar />}
                                 titulo="Guardar"
                                 bgcolor="#ef552b"
+                                type="submit"
                             />
                         </div>
                     </section>
