@@ -12,9 +12,11 @@ import { useState } from "react";
 
 export function MarcaTemplate({ data }) {
     const [state, setState] = useState(false);
-    const [dataSelect, setdataSelect] = useState([]);
     const [accion, setAccion] = useState("");
+    const [dataSelect, setdataSelect] = useState([]);
     const [openRegistro, SetopenRegistro] = useState(false);
+
+
     const nuevoRegistro = () => {
         SetopenRegistro(!openRegistro);
         setAccion("Nuevo");
@@ -51,7 +53,12 @@ export function MarcaTemplate({ data }) {
             </section>
             <section className="area2"></section>
             <section className="main">
-                <TablaMarca data={data} />
+                <TablaMarca
+                    data={data}
+                    SetopenRegistro={SetopenRegistro}
+                    setdataSelect={setdataSelect}
+                    setAccion={setAccion}
+                />
             </section>
         </Container>
     );

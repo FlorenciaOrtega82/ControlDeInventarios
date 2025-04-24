@@ -9,15 +9,33 @@ import {
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import { useMarcaStore, v, ContentAccionesTabla } from "../../../index";
-export function TablaMarca({ data }) {
+export function TablaMarca({
+    data,
+    SetopenRegistro,
+    setdataSelect,
+    setAccion,
+}) {
     const { eliminarMarca } = useMarcaStore();
-    const editar = () => {};
+    const editar = (data) => {
+        if (data.descripcion === "Generica") {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Este registro no se permite modificar ya que es valor por defecto.",
+            });
+            return;
+        }
+        console.log("Seteando accion:", "Editar");
+        SetopenRegistro(true);
+        setdataSelect(data);
+        setAccion("Editar");
+    };
     const eliminar = (p) => {
         if (p.descripcion === "Generica") {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "Este registro no se permite eliminar ya que es un valor por defecto.",
+                text: "Este registro no se permite eliminar ya que es valor por defecto.",
             });
             return;
         }

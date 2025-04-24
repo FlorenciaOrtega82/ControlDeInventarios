@@ -6,7 +6,7 @@ export function Btnsave({
     bgcolor,
     icono,
     url,
-    type = "button",
+    type = "submit",
 }) {
     return (
         <Container $bgcolor={bgcolor} type={type} onClick={funcion}>
