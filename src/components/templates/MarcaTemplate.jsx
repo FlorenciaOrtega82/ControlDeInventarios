@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import {
     Btnfiltro,
+    Buscador,
     ContentFiltro,
     Header,
     RegistrarMarca,
     TablaMarca,
     Title,
+    useMarcaStore,
     v,
 } from "../../index";
 import { useState } from "react";
@@ -15,13 +17,12 @@ export function MarcaTemplate({ data }) {
     const [accion, setAccion] = useState("");
     const [dataSelect, setdataSelect] = useState([]);
     const [openRegistro, SetopenRegistro] = useState(false);
-
-
     const nuevoRegistro = () => {
         SetopenRegistro(!openRegistro);
         setAccion("Nuevo");
         setdataSelect([]);
     };
+    const {setBuscador} = useMarcaStore()
     return (
         <Container>
             {openRegistro && (
@@ -51,7 +52,9 @@ export function MarcaTemplate({ data }) {
                     />
                 </ContentFiltro>
             </section>
-            <section className="area2"></section>
+            <section className="area2">
+                <Buscador setBuscador={setBuscador}/>
+            </section>
             <section className="main">
                 <TablaMarca
                     data={data}
@@ -77,24 +80,25 @@ const Container = styled.div`
         "main" auto;
     .header {
         grid-area: header;
-        background-color: rgba(183, 93, 241, 0.14);
+        /* background-color: rgba(183, 93, 241, 0.14); */
         display: flex;
         align-items: center;
     }
     .area1 {
         grid-area: area1;
-        background-color: rgba(229, 67, 26, 0.14);
+        /* background-color: rgba(229, 67, 26, 0.14); */
         display: flex;
         align-items: center;
     }
     .area2 {
         grid-area: area2;
-        background-color: rgba(77, 237, 106, 0.14);
+        /* background-color: rgba(77, 237, 106, 0.14); */
         display: flex;
         align-items: center;
+        justify-content:end;
     }
     .main {
         grid-area: main;
-        background-color: rgba(179, 46, 241, 0.14);
+        /* background-color: rgba(179, 46, 241, 0.14); */
     }
 `;
