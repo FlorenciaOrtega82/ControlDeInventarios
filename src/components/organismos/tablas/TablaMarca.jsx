@@ -8,6 +8,7 @@ import {
 } from "@tanstack/react-table";
 import styled from "styled-components";
 import Swal from "sweetalert2";
+import { FaArrowsAltV } from "react-icons/fa";
 import { useMarcaStore, v, ContentAccionesTabla } from "../../../index";
 export function TablaMarca({
     data,
@@ -62,6 +63,7 @@ export function TablaMarca({
         {
             accessorKey: "acciones",
             header: "",
+            enableSorting:false,
             cell: (info) => (
                 <td className="ContentCell">
                     <ContentAccionesTabla
@@ -90,6 +92,17 @@ export function TablaMarca({
                             {headerGroup.headers.map((header) => (
                                 <th key={header.id}>
                                     {header.column.columnDef.header}
+                                    {header.column.getCanSort() && (
+                                        <span style={{cursor:"pointer"}} onClick={header.column.getToggleSortingHandler()}>
+                                            <FaArrowsAltV/>
+                                        </span>
+                                    )}
+                                    {
+                                        {
+                                            asc:" ▲",
+                                            desc:" ▼",
+                                        }[header.column.getIsSorted()]
+                                    }
                                 </th>
                             ))}
                         </tr>
