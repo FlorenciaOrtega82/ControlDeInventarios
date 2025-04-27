@@ -14,6 +14,7 @@ export * from "./routes/router";
 export * from "./components/organismos/sidebar/Sidebar";
 export * from "./components/organismos/sidebar/SidebarCard";
 export * from "./components/organismos/tablas/TablaMarca";
+export * from "./components/organismos/tablas/Paginacion";
 export * from "./components/templates/PlantillaBase";
 export * from "./components/moleculas/Btnsave";
 export * from "./components/moleculas/BtnCircular";

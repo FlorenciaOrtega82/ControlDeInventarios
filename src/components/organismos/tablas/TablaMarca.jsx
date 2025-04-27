@@ -9,13 +9,15 @@ import {
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import { FaArrowsAltV } from "react-icons/fa";
-import { useMarcaStore, v, ContentAccionesTabla } from "../../../index";
+import { useMarcaStore, v, ContentAccionesTabla, Paginacion } from "../../../index";
+import { useState } from "react";
 export function TablaMarca({
     data,
     SetopenRegistro,
     setdataSelect,
     setAccion,
 }) {
+    const [pagina, setPagina] = useState(1);
     const { eliminarMarca } = useMarcaStore();
     const editar = (data) => {
         if (data.descripcion === "Generica") {
@@ -58,7 +60,9 @@ export function TablaMarca({
         {
             accessorKey: "descripcion",
             header: "Descripcion",
-            cell: (info) => <span>{info.getValue()}</span>,
+            cell: (info) => <td data-title="Descripcion" className="ContentCell">
+                <span>{info.getValue()}</span>,
+            </td>
         },
         {
             accessorKey: "acciones",
@@ -123,6 +127,11 @@ export function TablaMarca({
                     ))}
                 </tbody>
             </table>
+            <Paginacion table={table} irinicio={()=>table.setPageIndex(0)}
+                pagina={table.getState().pagination.pageIndex+1}
+                setPagina={setPagina}
+                maximo={table.getPageCount()
+            }/>
         </Container>
     );
 }
