@@ -9,7 +9,12 @@ import {
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import { FaArrowsAltV } from "react-icons/fa";
-import { useMarcaStore, v, ContentAccionesTabla, Paginacion } from "../../../index";
+import {
+    useMarcaStore,
+    v,
+    ContentAccionesTabla,
+    Paginacion,
+} from "../../../index";
 import { useState } from "react";
 export function TablaMarca({
     data,
@@ -60,14 +65,16 @@ export function TablaMarca({
         {
             accessorKey: "descripcion",
             header: "Descripcion",
-            cell: (info) => <td data-title="Descripcion" className="ContentCell">
-                <span>{info.getValue()}</span>,
-            </td>
+            cell: (info) => (
+                <td data-title="Descripcion" className="ContentCell">
+                    <span>{info.getValue()}</span>
+                </td>
+            ),
         },
         {
             accessorKey: "acciones",
             header: "",
-            enableSorting:false,
+            enableSorting: false,
             cell: (info) => (
                 <td className="ContentCell">
                     <ContentAccionesTabla
@@ -97,14 +104,17 @@ export function TablaMarca({
                                 <th key={header.id}>
                                     {header.column.columnDef.header}
                                     {header.column.getCanSort() && (
-                                        <span style={{cursor:"pointer"}} onClick={header.column.getToggleSortingHandler()}>
-                                            <FaArrowsAltV/>
+                                        <span
+                                            style={{ cursor: "pointer" }}
+                                            onClick={header.column.getToggleSortingHandler()}
+                                        >
+                                            <FaArrowsAltV />
                                         </span>
                                     )}
                                     {
                                         {
-                                            asc:" ▲",
-                                            desc:" ▼",
+                                            asc: " ▲",
+                                            desc: " ▼",
                                         }[header.column.getIsSorted()]
                                     }
                                 </th>
@@ -127,11 +137,13 @@ export function TablaMarca({
                     ))}
                 </tbody>
             </table>
-            <Paginacion table={table} irinicio={()=>table.setPageIndex(0)}
-                pagina={table.getState().pagination.pageIndex+1}
+            <Paginacion
+                table={table}
+                irinicio={() => table.setPageIndex(0)}
+                pagina={table.getState().pagination.pageIndex + 1}
                 setPagina={setPagina}
-                maximo={table.getPageCount()
-            }/>
+                maximo={table.getPageCount()}
+            />
         </Container>
     );
 }
