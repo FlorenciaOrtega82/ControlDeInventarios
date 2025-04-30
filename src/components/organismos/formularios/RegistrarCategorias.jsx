@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import {
     InputText,
@@ -7,35 +7,44 @@ import {
     useEmpresaStore,
     v,
     ConvertirCapitalize,
+    useCategoriasStore,
 } from "../../../index";
 import { useForm } from "react-hook-form";
+import { CirclePicker } from "react-color";
 export function RegistrarCategorias({ onClose, dataSelect, accion }) {
-    const { insertarMarca, editarMarca } = useMarcaStore();
+    const [currentColor, setColor] = useState("#F44336");
+    const { insertarcategorias, editarcategorias } = useCategoriasStore();
     const { dataempresa } = useEmpresaStore();
     const {
         register,
         formState: { errors },
         handleSubmit,
     } = useForm();
+    const elegirColor = (color) => {
+        setColor(color.hex);
+    };
     async function insertar(data) {
         if (accion === "Editar") {
             const p = {
                 id: dataSelect.id,
                 descripcion: ConvertirCapitalize(data.nombre),
+                color: currentColor,
             };
-            await editarMarca(p);
+            await editarcategorias(p);
             onClose();
         } else {
             const p = {
-                _descripcion:ConvertirCapitalize(data.nombre),
+                _descripcion: ConvertirCapitalize(data.nombre),
                 _idempresa: dataempresa.id,
+                _color: currentColor,
             };
-            await insertarMarca(p);
+            await insertarcategorias(p);
             onClose();
         }
     }
     useEffect(() => {
         if (accion === "Editar") {
+            setColor(dataSelect.color);
         }
     }, []);
     return (
@@ -68,11 +77,17 @@ export function RegistrarCategorias({ onClose, dataSelect, accion }) {
                                         required: true,
                                     })}
                                 />
-                                <label className="form__label">marca</label>
+                                <label className="form__label">categoria</label>
                                 {errors.nombre?.type === "required" && (
                                     <p>Campo requerido</p>
                                 )}
                             </InputText>
+                        </article>
+                        <article className="colorContainer">
+                            <CirclePicker
+                                onChange={elegirColor}
+                                color={currentColor}
+                            />
                         </article>
 
                         <div className="btnguardarContent">
@@ -80,7 +95,6 @@ export function RegistrarCategorias({ onClose, dataSelect, accion }) {
                                 icono={<v.iconoguardar />}
                                 titulo="Guardar"
                                 bgcolor="#ef552b"
-                                
                             />
                         </div>
                     </section>

@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import supabase from "./supabase.config";
 export async function InsertarCategorias(p) {
-    const { error } = await supabase.rpc("insertarCategorias", p);
+    const { error } = await supabase.rpc("insertarcategorias", p);
     if (error) {
         Swal.fire({
             icon: "error",

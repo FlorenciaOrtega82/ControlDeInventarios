@@ -5,8 +5,9 @@ import {
     ContentFiltro,
     Header,
     RegistrarCategorias,
-    TablaMarca,
+    TablaCategorias,
     Title,
+    useCategoriasStore,
     useMarcaStore,
     v,
 } from "../../index";
@@ -22,7 +23,7 @@ export function CategoriasTemplate({ data }) {
         setAccion("Nuevo");
         setdataSelect([]);
     };
-    const { setBuscador } = useMarcaStore();
+    const { setBuscador } = useCategoriasStore();
     return (
         <Container>
             {openRegistro && (
@@ -56,7 +57,7 @@ export function CategoriasTemplate({ data }) {
                 <Buscador setBuscador={setBuscador} />
             </section>
             <section className="main">
-                <TablaMarca
+                <TablaCategorias
                     data={data}
                     SetopenRegistro={SetopenRegistro}
                     setdataSelect={setdataSelect}
