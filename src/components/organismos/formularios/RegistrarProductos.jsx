@@ -13,17 +13,27 @@ import {
     Btnfiltro,
     RegistrarMarca,
     ListaGenerica,
+    useCategoriasStore,
+    RegistrarCategorias,
 } from "../../../index";
 import { useForm } from "react-hook-form";
 export function RegistrarProductos({ onClose, dataSelect, accion }) {
     const { insertarproductos, editarproductos } = useProductosStore();
     const { dataempresa } = useEmpresaStore();
-    const { marcaItemSelect, datamarca,selectMarca } = useMarcaStore();
+    const { marcaItemSelect, datamarca, selectMarca } = useMarcaStore();
+    const { categoriasItemSelect, datacategorias, selectcategorias } =
+        useCategoriasStore();
     const [stateMarca, setStateMarca] = useState(false);
+    const [stateCategoria, setStateCategoria] = useState(false);
     const [openRegistroMarca, SetopenRegistroMarca] = useState(false);
+    const [openRegistroCategoria, SetopenRegistroCategoria] = useState(false);
     const [subaccion, setAccion] = useState("");
     const nuevoRegistroMarca = () => {
         SetopenRegistroMarca(!openRegistroMarca);
+        setAccion("Nuevo");
+    };
+    const nuevoRegistroCategoria = () => {
+        SetopenRegistroCategoria(!openRegistroCategoria);
         setAccion("Nuevo");
     };
     const {
@@ -100,8 +110,8 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
                                 texto2={marcaItemSelect?.descripcion}
                             />
                             {stateMarca && (
-                                <ListaGenerica 
-                                    setState={()=>setStateMarca(!stateMarca)}
+                                <ListaGenerica
+                                    setState={() => setStateMarca(!stateMarca)}
                                     bottom="-260px"
                                     scroll="scroll"
                                     data={datamarca}
@@ -115,6 +125,73 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
                                 textcolor="#353535"
                                 icono={<v.agregar />}
                             />
+                        </ContainerSelector>
+                        <article>
+                            <InputText icono={<v.iconostock />}>
+                                <input
+                                    className="form__field"
+                                    type="number"
+                                    step="0.01"
+                                    placeholder=""
+                                    defaultValue={dataSelect.stock}
+                                    {...register("stock", {
+                                        required: true,
+                                    })}
+                                />
+                                <label className="form__label">Stock</label>
+                                {errors.stock?.type === "required" && (
+                                    <p>Campo requerido</p>
+                                )}
+                            </InputText>
+                        </article>
+                        <article>
+                            <InputText icono={<v.iconostockminimo />}>
+                                <input
+                                    step="0.01"
+                                    className="form__field"
+                                    defaultValue={dataSelect.stock_minimo}
+                                    type="number"
+                                    placeholder=""
+                                    {...register("stockminimo", {
+                                        required: true,
+                                    })}
+                                />
+                                <label className="form__label">
+                                    Stock minimo
+                                </label>
+                                {errors.stockminimo?.type === "required" && (
+                                    <p>Campo requerido</p>
+                                )}
+                            </InputText>
+                        </article>
+                        <ContainerSelector>
+                            <label>Categoria: </label>
+                            <Selector
+                                funcion={() =>
+                                    setStateCategoria(!stateCategoria)
+                                }
+                                state={stateCategoria}
+                                color="#fc6027"
+                                texto1="🍿"
+                                texto2={categoriasItemSelect?.descripcion}
+                            />
+                            <Btnfiltro
+                                funcion={nuevoRegistroCategoria}
+                                bgcolor="#f6f3f3"
+                                textcolor="#353535"
+                                icono={<v.agregar />}
+                            />
+                            {stateCategoria && (
+                                <ListaGenerica
+                                    setState={() =>
+                                        setStateCategoria(!stateCategoria)
+                                    }
+                                    bottom="-260px"
+                                    scroll="scroll"
+                                    data={datacategorias}
+                                    funcion={selectcategorias}
+                                />
+                            )}
                         </ContainerSelector>
 
                         <div className="btnguardarContent">
@@ -130,6 +207,15 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
                     <RegistrarMarca
                         accion={subaccion}
                         onClose={() => SetopenRegistroMarca(!openRegistroMarca)}
+                        dataSelect={dataSelect}
+                    />
+                )}
+                {openRegistroCategoria && (
+                    <RegistrarCategorias
+                        accion={subaccion}
+                        onClose={() =>
+                            SetopenRegistroCategoria(!openRegistroCategoria)
+                        }
                         dataSelect={dataSelect}
                     />
                 )}
