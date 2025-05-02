@@ -16,6 +16,7 @@ import {
     useCategoriasStore,
     RegistrarCategorias,
 } from "../../../index";
+import { Device } from "../../../styles/breackpoints";
 import { useForm } from "react-hook-form";
 export function RegistrarProductos({ onClose, dataSelect, accion }) {
     const { insertarproductos, editarproductos } = useProductosStore();
@@ -80,7 +81,7 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
                 </div>
 
                 <form className="formulario" onSubmit={handleSubmit(insertar)}>
-                    <section>
+                    <section className="seccion1">
                         <article>
                             <InputText icono={<v.icononombre />}>
                                 <input
@@ -193,15 +194,54 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
                                 />
                             )}
                         </ContainerSelector>
-
-                        <div className="btnguardarContent">
-                            <Btnsave
-                                icono={<v.iconoguardar />}
-                                titulo="Guardar"
-                                bgcolor="#ef552b"
-                            />
-                        </div>
                     </section>
+                    <seccion className="seccion2">
+                        <article>
+                            <InputText icono={<v.iconocodigobarras />}>
+                                <input
+                                    className="form__field"
+                                    defaultValue={dataSelect.codigobarras}
+                                    type="number"
+                                    placeholder=""
+                                    {...register("codigobarras", {
+                                        required: true,
+                                    })}
+                                />
+                                <label className="form__label">
+                                    codigo de barras
+                                </label>
+                                {errors.codigobarras?.type === "required" && (
+                                    <p>Campo requerido</p>
+                                )}
+                            </InputText>
+                        </article>
+                        <article>
+                            <InputText icono={<v.iconocodigointerno />}>
+                                <input
+                                    className="form__field"
+                                    defaultValue={dataSelect.codigointerno}
+                                    type="text"
+                                    placeholder=""
+                                    {...register("codigointerno", {
+                                        required: true,
+                                    })}
+                                />
+                                <label className="form__label">
+                                    Codigo interno
+                                </label>
+                                {errors.codigointerno?.type === "required" && (
+                                    <p>Campo requerido</p>
+                                )}
+                            </InputText>
+                        </article>
+                    </seccion>
+                    <div className="btnguardarContent">
+                        <Btnsave
+                            icono={<v.iconoguardar />}
+                            titulo="Guardar"
+                            bgcolor="#ef552b"
+                        />
+                    </div>
                 </form>
                 {openRegistroMarca && (
                     <RegistrarMarca
@@ -237,13 +277,25 @@ const Container = styled.div`
     z-index: 1000;
 
     .sub-contenedor {
-        width: 500px;
-        max-width: 85%;
+        width: 100%;
+        max-width: 90%;
         border-radius: 20px;
         background: ${({ theme }) => theme.bgtotal};
         box-shadow: -10px 15px 30px rgba(10, 9, 9, 0.4);
         padding: 13px 36px 20px 36px;
         z-index: 100;
+        height: 90vh;
+        overflow-y:auto;
+        overflow-x:hidden;
+        &::-webkit-scrollbar {
+            width:6px;
+            border-radius:10px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: #484848;
+            border-radius:10px;
+        }
+
 
         .headers {
             display: flex;
@@ -261,15 +313,23 @@ const Container = styled.div`
             }
         }
         .formulario {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            @media ${Device.tablet} {
+                grid-template-columns: repeat(2, 1fr);
+            }
             section {
                 gap: 20px;
                 display: flex;
                 flex-direction: column;
-                .colorContainer {
-                    .colorPickerContent {
-                        padding-top: 15px;
-                        min-height: 50px;
-                    }
+            }
+            .btnguardarContent {
+                display: flex;
+                justify-content: end;
+                grid-column: 1;
+                @media ${Device.tablet} {
+                    grid-column: 2;
                 }
             }
         }
