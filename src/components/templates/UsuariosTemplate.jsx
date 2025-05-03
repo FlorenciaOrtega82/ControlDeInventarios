@@ -4,7 +4,7 @@ import {
     Buscador,
     ContentFiltro,
     Header,
-    RegistrarMarca,
+    RegistrarUsuarios,
     TablaMarca,
     Title,
     useMarcaStore,
@@ -12,7 +12,7 @@ import {
 } from "../../index";
 import { useState } from "react";
 
-export function PersonalTemplate({ data }) {
+export function UsuariosTemplate({ data }) {
     const [state, setState] = useState(false);
     const [accion, setAccion] = useState("");
     const [dataSelect, setdataSelect] = useState([]);
@@ -26,7 +26,7 @@ export function PersonalTemplate({ data }) {
     return (
         <Container>
             {openRegistro && (
-                <RegistrarMarca
+                <RegistrarUsuarios
                     dataSelect={dataSelect}
                     accion={accion}
                     onClose={() => SetopenRegistro(!openRegistro)}
