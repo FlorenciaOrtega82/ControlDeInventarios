@@ -27,8 +27,8 @@ export function Productos() {
         ],
         queryFn: () =>
             buscarproductos({
-                id_empresa: dataempresa.id,
-                descripcion: buscador,
+                _id_empresa: dataempresa.id,
+                buscador: buscador,
             }),
         enabled: dataempresa.id != null,
     });

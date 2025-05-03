@@ -33,10 +33,7 @@ export async function EditarProductos(p) {
 }
 
 export async function BuscarProductos(p) {
-    const { data } = await supabase
-        .from("productos")
-        .select()
-        .eq("id_empresa", p.id_empresa)
-        .ilike("descripcion", `%${p.descripcion}%`);
+    const { data } = await supabase.rpc("buscarproductos", p);
+        
     return data;
 }
