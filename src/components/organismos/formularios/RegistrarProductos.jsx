@@ -45,15 +45,32 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
     async function insertar(data) {
         if (accion === "Editar") {
             const p = {
-                id: dataSelect.id,
-                descripcion: ConvertirCapitalize(data.nombre),
+                id:dataSelect.id,
+                descripcion: ConvertirCapitalize(data.descripcion),
+                idmarca: marcaItemSelect.id,
+                stock: parseFloat(data.stock),
+                stock_minimo: parseFloat(data.stockminimo),
+                codigobarras: parseFloat(data.codigobarras),
+                codigointerno:data.codigointerno,
+                precioventa: parseFloat(data.precioventa),
+                preciocompra: parseFloat(data.preciocompra),
+                id_categoria:categoriasItemSelect.id,
+                id_empresa:dataempresa.id,
             };
             await editarproductos(p);
             onClose();
         } else {
             const p = {
-                _descripcion: ConvertirCapitalize(data.nombre),
-                _idempresa: dataempresa.id,
+                _descripcion: ConvertirCapitalize(data.descripcion),
+                _idmarca: marcaItemSelect.id,
+                _stock: parseFloat(data.stock),
+                _stock_minimo: parseFloat(data.stockminimo),
+                _codigobarras: parseFloat(data.codigobarras),
+                _codigointerno:data.codigointerno,
+                _precioventa: parseFloat(data.precioventa),
+                _preciocompra: parseFloat(data.preciocompra),
+                _id_categoria:categoriasItemSelect.id,
+                _id_empresa:dataempresa.id,
             };
             await insertarproductos(p);
             onClose();
@@ -89,12 +106,12 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
                                     defaultValue={dataSelect.descripcion}
                                     type="text"
                                     placeholder=""
-                                    {...register("nombre", {
+                                    {...register("descripcion", {
                                         required: true,
                                     })}
                                 />
                                 <label className="form__label">
-                                    descripcion
+                                    Descripcion
                                 </label>
                                 {errors.nombre?.type === "required" && (
                                     <p>Campo requerido</p>
@@ -208,7 +225,7 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
                                     })}
                                 />
                                 <label className="form__label">
-                                    codigo de barras
+                                    Codigo de barras
                                 </label>
                                 {errors.codigobarras?.type === "required" && (
                                     <p>Campo requerido</p>
@@ -230,6 +247,46 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
                                     Codigo interno
                                 </label>
                                 {errors.codigointerno?.type === "required" && (
+                                    <p>Campo requerido</p>
+                                )}
+                            </InputText>
+                        </article>
+                        <article>
+                            <InputText icono={<v.iconoprecioventa />}>
+                                <input
+                                    step="0.01"
+                                    className="form__field"
+                                    defaultValue={dataSelect.precioventa}
+                                    type="number"
+                                    placeholder=""
+                                    {...register("precioventa", {
+                                        required: true,
+                                    })}
+                                />
+                                <label className="form__label">
+                                    Precio de venta
+                                </label>
+                                {errors.precioventa?.type === "required" && (
+                                    <p>Campo requerido</p>
+                                )}
+                            </InputText>
+                        </article>
+                        <article>
+                            <InputText icono={<v.iconopreciocompra />}>
+                                <input
+                                    step="0.01"
+                                    className="form__field"
+                                    defaultValue={dataSelect.preciocompra}
+                                    type="number"
+                                    placeholder=""
+                                    {...register("preciocompra", {
+                                        required: true,
+                                    })}
+                                />
+                                <label className="form__label">
+                                    Precio de compra
+                                </label>
+                                {errors.preciocompra?.type === "required" && (
                                     <p>Campo requerido</p>
                                 )}
                             </InputText>

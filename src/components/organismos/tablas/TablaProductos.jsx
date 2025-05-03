@@ -72,6 +72,26 @@ export function TablaProductos({
             ),
         },
         {
+            accessorKey: "stock",
+            header: "Stock",
+            enableSorting:false,
+            cell: (info) => (
+                <td data-title="Stock" className="ContentCell">
+                    <span>{info.getValue()}</span>
+                </td>
+            ),
+        },
+        {
+            accessorKey: "precioventa",
+            header: "P. venta",
+            enableSorting:false,
+            cell: (info) => (
+                <td data-title="P.venta" className="ContentCell">
+                    <span>{info.getValue()}</span>
+                </td>
+            ),
+        },
+        {
             accessorKey: "acciones",
             header: "",
             enableSorting: false,
