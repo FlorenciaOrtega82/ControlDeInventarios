@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { InsertarUsuarios, MostrarUsuarios } from "../index";
+import { BuscarUsuarios, EditarUsuarios, EliminarUsuarios, InsertarAsignaciones, InsertarUsuarios, MostrarUsuarios, MostrarUsuariosTodos } from "../index";
 import supabase from "../supabase/supabase.config";
 
 export const useUsuariosStore = create((set, get) => ({
@@ -23,4 +23,67 @@ export const useUsuariosStore = create((set, get) => ({
         set({ idusuario: response.id });
         return response;
     },
+    buscador:"",
+        setBuscador:(p)=>{
+            set({buscador:p})
+        },
+        datausuarios:[],
+        usuariosItemSelect:[],
+        parametros:{},
+        mostrarusuariosTodos: async (p)=>{
+            const response = await MostrarUsuariosTodos(p);
+            set({parametros:p})
+            set({datausuarios:response})
+            set({usuariosItemSelect:response[0]})
+            return response;
+        },
+        selectusuarios:(p)=>{
+            set({usuariosItemSelect:p})
+        },
+        insertarusuarios:async (parametrosAuth,p)=>{
+            const {data, error} = await supabase.auth.signUp({
+                email: parametrosAuth.correo,
+                password: parametrosAuth.pass,
+            })
+            if(error){
+                return null
+            }
+            const dataUserNew = await InsertarUsuarios({
+                nombres: p.nombres,
+                nro_doc: p.nrdoc,
+                telefono:p.telefono,
+                direccion:p.direccion,
+                fecharegistro: new Date(),
+                estado:"activo",
+                idauth: data.user.id,
+                tipouser: p.tipouser,
+                tipodoc: p.tipodoc,
+            })
+
+            await InsertarAsignaciones({
+                id_empresa:p.id_empresa,
+                id_usuario:dataUserNew.id
+            })
+
+            
+            const {mostrarusuarios} = get();
+            const {parametros} = get();
+            set(mostrarusuarios(parametros))
+        },
+        eliminarusuarios:async (p)=>{
+            await EliminarUsuarios(p);
+            const {mostrarusuarios} = get();
+            const {parametros} = get();
+            set(mostrarusuarios(parametros));
+        },
+        editarusuarios: async (p)=>{
+            await EditarUsuarios(p);
+            const {mostrarusuarios} = get();
+            const {parametros} = get();
+            set(mostrarusuarios(parametros));
+        },
+        buscarusuarios: async (p)=>{
+            const response = await BuscarUsuarios(p);
+            set({datausuarios:response})
+        }
 }));
