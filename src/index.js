@@ -33,6 +33,7 @@ export * from "./components/atomos/ContentFiltro";
 export * from "./components/atomos/Colorcontent";
 export * from "./components/atomos/ContainerSelector";
 export * from "./components/atomos/BtnCerrar";
+export * from "./components/atomos/ColorcontentTable";
 export * from "./components/organismos/MenuHambur";
 export * from "./store/AuthStore";
 export * from "./store/usuariosStore";

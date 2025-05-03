@@ -78,6 +78,8 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
     }
     useEffect(() => {
         if (accion === "Editar") {
+            selectMarca({id:dataSelect.idmarca,descripcion:dataSelect.marca})
+            selectcategorias({id:dataSelect.id_categoria,descripcion:dataSelect.categoria})
         }
     }, []);
     return (
@@ -212,7 +214,7 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
                             )}
                         </ContainerSelector>
                     </section>
-                    <seccion className="seccion2">
+                    <section className="seccion2">
                         <article>
                             <InputText icono={<v.iconocodigobarras />}>
                                 <input
@@ -291,7 +293,7 @@ export function RegistrarProductos({ onClose, dataSelect, accion }) {
                                 )}
                             </InputText>
                         </article>
-                    </seccion>
+                    </section>
                     <div className="btnguardarContent">
                         <Btnsave
                             icono={<v.iconoguardar />}

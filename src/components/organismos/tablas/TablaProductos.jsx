@@ -14,6 +14,7 @@ import {
     ContentAccionesTabla,
     Paginacion,
     useProductosStore,
+    ColorcontentTable,
 } from "../../../index";
 import { useState } from "react";
 export function TablaProductos({
@@ -74,7 +75,7 @@ export function TablaProductos({
         {
             accessorKey: "stock",
             header: "Stock",
-            enableSorting:false,
+            enableSorting: false,
             cell: (info) => (
                 <td data-title="Stock" className="ContentCell">
                     <span>{info.getValue()}</span>
@@ -83,14 +84,50 @@ export function TablaProductos({
         },
         {
             accessorKey: "precioventa",
-            header: "P. venta",
-            enableSorting:false,
+            header: "P.venta",
+            enableSorting: false,
             cell: (info) => (
                 <td data-title="P.venta" className="ContentCell">
                     <span>{info.getValue()}</span>
                 </td>
             ),
         },
+        {
+            accessorKey: "preciocompra",
+            header: "P.compra",
+            enableSorting: false,
+            cell: (info) => (
+                <td data-title="P.compra" className="ContentCell">
+                    <span>{info.getValue()}</span>
+                </td>
+            ),
+        },
+        {
+            accessorKey: "categoria",
+            header: "Categoria",
+            enableSorting: false,
+            cell: (info) => (
+                <td data-title="Categoria" className="ContentCell">
+                    <ColorcontentTable
+                        $color={info.row.original.color}
+                        className="contentCategoria"
+                    >
+                        {info.getValue()}
+                    </ColorcontentTable>
+                </td>
+            ),
+        },
+        {
+            accessorKey: "marca",
+            header: "Marca",
+            enableSorting: false,
+            cell: (info) => (
+                <td data-title="Marca" className="ContentCell">
+                    <span>{info.getValue()}</span>
+                </td>
+            ),
+        },
+
         {
             accessorKey: "acciones",
             header: "",
